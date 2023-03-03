@@ -1,8 +1,8 @@
 SET VERIFY OFF
 connect "SYS"/"&1" as SYSDBA
 set echo on
-spool Scripts\Logs\CreateDB.log append
-startup nomount pfile="C:\oracle\product\19.0.0\dbhome_1\database\init.ora";
+spool c:\scripts\logs\CreateDB.log append
+startup nomount pfile="C:\oracle\product\19.0.0\dbhome_1\database\initORA193.ora";
 CREATE DATABASE "ORA193"
 MAXINSTANCES 8
 MAXLOGHISTORY 1

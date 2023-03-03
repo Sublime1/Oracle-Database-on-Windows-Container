@@ -11,3 +11,4 @@ host C:\oracle\product\19.0.0\dbhome_1\bin\orapwd.exe file=C:\oracle\product\19.
 @c:\scripts\lockAccount.sql &1
 @c:\scripts\postDBCreation.sql &1
 @c:\scripts\Post-install.sql &1
+exit

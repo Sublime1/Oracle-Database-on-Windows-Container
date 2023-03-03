@@ -1,7 +1,7 @@
 SET VERIFY OFF
 connect "SYS"/"&1" as SYSDBA
 set echo on
-spool Scripts\Logs\lockAccount.log append
+spool c:\scripts\logs\lockAccount.log append
 BEGIN 
  FOR item IN ( SELECT USERNAME, AUTHENTICATION_TYPE FROM DBA_USERS WHERE ACCOUNT_STATUS IN ('OPEN', 'LOCKED', 'EXPIRED') AND USERNAME NOT IN ( 
 'SYS','SYSTEM') ) 

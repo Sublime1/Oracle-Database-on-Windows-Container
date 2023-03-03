@@ -19,6 +19,7 @@ md "%SystemDrive%\oracle\admin\%databaseInstanceName%\dpdump"
 md "%SystemDrive%\oracle\admin\%databaseInstanceName%\pfile"
 md "%SystemDrive%\oracle\cfgtoollogs\dbca\%databaseInstanceName%"
 md "%databaseInstanceORADATA%\%databaseInstanceName%"
+md "%SystemDrive%\scripts\logs"
 echo.
 echo Setting Oracle Base directory permissions...
 icacls "%SystemDrive%\oracle" /reset /T /C /Q
@@ -27,14 +28,15 @@ if not "%databaseInstanceORADATA%"=="%SystemDrive%\oracle\oradata" (
 	icacls "%databaseInstanceORADATA%" /reset /T /C /Q
 	icacls "%databaseInstanceORADATA%" /grant:r ORA_OraDB19Home1_SVCACCTS:^(OI^)^(CI^)M /T /C /Q
 )
+echo.
 echo Installing database instance... This may take a while, do not close this window!
 set ORACLE_SID=%databaseInstanceName%
 set ORACLE_HOME=%SystemDrive%\oracle\product\19.0.0\dbhome_1
 setx ORACLE_HOME %SystemDrive%\oracle\product\19.0.0\dbhome_1 /m
 set PERL5LIB=%ORACLE_HOME%/rdbms/admin;%PERL5LIB%
 set PATH=%ORACLE_HOME%\bin;%ORACLE_HOME%\perl\bin;%PATH%
-copy /y "C:\scripts\init.ora" "%SystemDrive%\oracle\product\19.0.0\dbhome_1\database"
-"%SystemDrive%\oracle\product\19.0.0\dbhome_1\bin\oradim.exe" -new -sid %databaseInstanceName% -startmode auto -srvcstart system
+copy /y "C:\scripts\init.ora" "%SystemDrive%\oracle\product\19.0.0\dbhome_1\database\init%databaseInstanceName%.ora"
+"%SystemDrive%\oracle\product\19.0.0\dbhome_1\bin\oradim.exe" -new -sid %databaseInstanceName% -startmode auto -srvcstart system -pfile "%SystemDrive%\oracle\product\19.0.0\dbhome_1\database\init%databaseInstanceName%.ora"
 start /wait cmd /c "%SystemDrive%\oracle\product\19.0.0\dbhome_1\bin\sqlplus.exe /nolog @C:\scripts\Install.sql %databaseInstanceSYSDBAPassword%"
 echo.
 echo Setting %databaseInstanceName% database instance as default ORACLE_SID in Windows Registry...

@@ -28,6 +28,7 @@ control_files=("C:\oracle\oradata\ORA193\control01.ctl", "C:\oracle\oradata\ORA1
 compatible=19.0.0
 diagnostic_dest=C:\oracle
 memory_target=1536m
+LOCAL_LISTENER="(ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521))"
  
 ###########################################
 # NLS

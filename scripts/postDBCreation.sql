@@ -1,9 +1,9 @@
 SET VERIFY OFF
-spool Scripts\Logs\postDBCreation.log append
+spool c:\scripts\logs\postDBCreation.log append
 host C:\oracle\product\19.0.0\dbhome_1\OPatch\datapatch.bat -skip_upgrade_check -db ORA193;
 connect "SYS"/"&1" as SYSDBA
 set echo on
-create spfile='C:\oracle\product\19.0.0\dbhome_1\database\spfileORA193.ora' FROM pfile='C:\oracle\product\19.0.0\dbhome_1\database\init.ora';
+create spfile='C:\oracle\product\19.0.0\dbhome_1\database\spfileORA193.ora' FROM pfile='C:\oracle\product\19.0.0\dbhome_1\database\initORA193.ora';
 connect "SYS"/"&1" as SYSDBA
 select 'utlrp_begin: ' || to_char(sysdate, 'HH:MI:SS') from dual;
 @C:\oracle\product\19.0.0\dbhome_1\rdbms\admin\utlrp.sql;
@@ -13,4 +13,3 @@ shutdown immediate;
 connect "SYS"/"&1" as SYSDBA
 startup ;
 spool off
-exit;
